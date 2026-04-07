@@ -33,8 +33,28 @@ regd_users.post("/login", (req,res) => {
 // Add a book review
 //task8
 regd_users.put("/auth/review/:isbn", (req, res) => {
-  let isbn = 
-  return res.status(300).json({message: "Yet to be implemented"});
+  let isbn = req.params.isbn;
+  let review = req.body.review;
+  let username = req.session.authorization.username;
+  if (books[isbn]) {
+    books[isbn].reviews[username] = review;
+    return res.status(200).json({message:"review added"});  
+  } else {
+    return res.status(404).json({ message: "book not found" });
+  }
+});
+
+// delete a book review
+//task9
+regd_users.delete("/auth/review/:isbn", (req, res) => {
+    let isbn = req.params.isbn;
+    let username = req.session.authorization.username;
+    if (books[isbn] && books[isbn].reviews[username]) {
+        delete books[isbn].reviews[username];
+        return res.status(200).json({ message: "reeview deleted" });
+    } else {
+        return res.status(404).json({ message: "review not found" });
+    }
 });
 
 module.exports.authenticated = regd_users;
