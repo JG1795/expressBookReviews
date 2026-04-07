@@ -14,14 +14,26 @@ const authenticatedUser = (username,password)=>{ //returns boolean
 }
 
 //only registered users can login
+//task7
 regd_users.post("/login", (req,res) => {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  const username = req.body.username;
+  const password = req.body.password;
+  //check 
+  if (!authenticatedUser(username, password)) {
+    return res.status(401).json({ message: "wrong credentials"});
+  } else {
+    // generate token
+    let logToken = jwt.sign({ username: username }, "access", { expiresIn: "1h" });
+    //save token
+    req.session.authorization = { logToken, username }
+    return res.status(200).json({message: "User logged in successfully", token: token});
+  }
 });
 
 // Add a book review
+//task8
 regd_users.put("/auth/review/:isbn", (req, res) => {
-  //Write your code here
+  let isbn = 
   return res.status(300).json({message: "Yet to be implemented"});
 });
 
