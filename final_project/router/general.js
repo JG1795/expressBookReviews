@@ -3,7 +3,7 @@ let books = require("./booksdb.js");
 let isValid = require("./auth_users.js").isValid;
 let users = require("./auth_users.js").users;
 const public_users = express.Router();
-//const Axios = require("axios")
+const Axios = require("axios")
 
 //task 6
 public_users.post("/register", (req,res) => {
@@ -39,7 +39,7 @@ public_users.get('/',function (req, res) {
 
 
 
-/*
+
 //task10 axios version
 public_users.get('/', async function (req, res) {
   const getBooks = () => {
@@ -59,11 +59,11 @@ public_users.get('/', async function (req, res) {
     res.status(404).json({ message: error });
   }
 });
-*/
 
 
 
 
+/*
 //task 10---------------------
 public_users.get('/', function (req, res) {
     const getBooks = () => {
@@ -84,6 +84,7 @@ public_users.get('/', function (req, res) {
         res.status(404).json({ message: error });
       });
   });
+*/
 
 // Get book details based on ISBN
 //task 2
