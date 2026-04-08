@@ -24,7 +24,7 @@ public_users.post("/register", (req,res) => {
 });
 
 
-// Get the book list available in the shop
+//Get the book list available in the shop
 //task 1
 /*
 public_users.get('/',function (req, res) {
@@ -56,7 +56,7 @@ public_users.get('/', async function (req, res) {
     const formattedBooks = await getBooks();
     res.status(200).send(formattedBooks);
   } catch (error) {
-    res.status(404).json({ message: error });
+    res.status(404).json({ message: "Not found" });
   }
 });
 
@@ -64,7 +64,7 @@ public_users.get('/', async function (req, res) {
 
 
 /*
-//task 10---------------------
+//task 10
 public_users.get('/', function (req, res) {
     const getBooks = () => {
       return new Promise((resolve, reject) => {
@@ -102,7 +102,7 @@ public_users.get('/isbn/:isbn',function (req, res) {
 */
 
 
- //task 11--------------
+ //task 11
  public_users.get('/isbn/:isbn',function (req, res) {
     // Retrieve the isbn parameter from the request URL and send the corresponding book's details
     const isbn = req.params.isbn;
@@ -120,7 +120,7 @@ public_users.get('/isbn/:isbn',function (req, res) {
           res.status(200).send(bookFound);
         })
         .catch((error) => {
-          res.status(404).json({ message: error });
+          res.status(404).json({ message: "Not found" });
         });
  });
 
@@ -144,41 +144,10 @@ public_users.get('/author/:author',function (req, res) {
     }
 });
 */
-/*
-//optional
-public_users.get('/author/:author', function (req, res) {
-    const author = req.params.author;
-    
-    new Promise((resolve, reject) => {
-        let booksbyauthor = [];
-        const isbns = Object.keys(books);
-        
-        // Iterate through all books to check the author
-        isbns.forEach((isbn) => {
-          if (books[isbn].author === author) {
-            booksbyauthor.push({
-               isbn: isbn,
-               title: books[isbn].title,
-               reviews: books[isbn].reviews
-            });
-          }
-        });
-        
-        // Resolve if books are found, otherwise reject
-        if (booksbyauthor.length > 0) {
-            resolve(booksbyauthor);
-        } else {
-            reject(`No books found for author: ${author}`);
-        }
-    })
-    .then((data) => res.status(200).send({booksbyauthor: data}))
-    .catch((err) => res.status(404).json({message: err}));
-  });
-*/
 
 
 
-//task12 -------------
+//task12 
 public_users.get('/author/:author',function (req, res) {
     let author = req.params.author;
     const bookByAuthor = (authorName) => {
@@ -198,7 +167,7 @@ public_users.get('/author/:author',function (req, res) {
           res.status(200).send(booksFound);
         })
         .catch((error) => {
-          res.status(404).json({ message: "error" });
+          res.status(404).json({ message: "Not found" });
         });
   });
 
@@ -224,7 +193,7 @@ public_users.get('/title/:title',function (req, res) {
   });
 */  
 
-//task13--------------
+//task13
 public_users.get('/title/:title', function (req, res) {
     let title = req.params.title;
     const bookByTitle = (bookTitle) => {
@@ -244,7 +213,7 @@ public_users.get('/title/:title', function (req, res) {
           res.status(200).send(booksFound);
         })
         .catch((error) => {
-          res.status(404).json({ message: error });
+          res.status(404).json({ message: "Not found" });
         });
   });
 
