@@ -26,7 +26,7 @@ regd_users.post("/login", (req,res) => {
     let logToken = jwt.sign({ username: username }, "access", { expiresIn: "1h" });
     //save token
     req.session.authorization = { logToken, username }
-    return res.status(200).json({message: "User logged in successfully", token: token});
+    return res.status(200).json({message: "User logged in successfully", token: logToken});
   }
 });
 
@@ -56,6 +56,11 @@ regd_users.delete("/auth/review/:isbn", (req, res) => {
         return res.status(404).json({ message: "review not found" });
     }
 });
+
+module.exports.authenticated = regd_users;
+module.exports.isValid = isValid;
+module.exports.users = users;
+
 
 module.exports.authenticated = regd_users;
 module.exports.isValid = isValid;
