@@ -11,7 +11,7 @@ public_users.post("/register", (req,res) => {
     let password = req.body.password;
     console.log(req.body)
     if(username && password){
-      if(isValid(username)){
+      if(!isValid(username)){
         users.push({username:username,password:password});
         return res.status(200).json({message: "User registered successfully"});
       }
@@ -181,17 +181,6 @@ public_users.get('/author/:author', function (req, res) {
 public_users.get('/author/:author',function (req, res) {
     let author = req.params.author;
     const bookByAuthor = (authorName) => {
-        /*return new Promise((resolve, reject) => {
-            //const author = req.params.author
-            const booksByAuthor = Object.values(books).filter(
-              (b) => b.author === author
-            );
-            if (booksByAuthor.length === 0) {
-              reject('No books found for this author');
-            } else {
-              resolve(JSON.stringify(booksByAuthor, null, 4));
-            }
-          });*/
         return new Promise((resolve, reject) => {
             const booksFiltered = Object.values(books).filter(
                 (b) => b.author === authorName
@@ -238,16 +227,6 @@ public_users.get('/title/:title',function (req, res) {
 public_users.get('/title/:title', function (req, res) {
     let title = req.params.title;
     const bookByTitle = (bookTitle) => {
-       /* return new Promise((resolve, reject) => {
-            const booksByTitle = Object.values(books).filter((b) =>
-              b.title.includes(title)
-            )
-            if (booksByTitle.length > 0) {
-              reject('No books found with this title')
-            } else {
-              resolve(booksByTitle)
-            }
-          })*/
         return new Promise((resolve, reject) => {
             const booksFiltered = Object.values(books).filter(
                 (b) => b.title === bookTitle
